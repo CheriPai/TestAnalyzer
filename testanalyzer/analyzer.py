@@ -1,7 +1,6 @@
 import os
+from pythonanalyzer import PythonAnalyzer
 
-# TODO: Make parent class FileAnalyzer
-# TODO: Implement children JavaFileAnalyzer and PythonFileAnalyzer
 
 class Analyzer:
 
@@ -10,22 +9,37 @@ class Analyzer:
     def __init__(self, project_name):
         self.project_name = project_name
         self.valid_files = self.get_valid_files()
-        self.lines_test = 0
-        self.lines_code = 0
-        self.classes_test = 0
-        self.classes_code = 0
-        self.functions_test = 0
-        self.functions_code = 0
+        self.file_analyzer = None
+        self.test_counts = {
+            "line_count": 0,
+            "class_count": 0,
+            "function_count": 0
+            }
+        self.code_counts = {
+            "line_count": 0,
+            "class_count": 0,
+            "function_count": 0
+            }
 
     def run(self):
         for f in self.valid_files:
-            print(f, self.get_line_count(f))
-            if "test" in os.path.basename(f).lower():
-                self.lines_test += self.get_line_count(f)
+            if ".py" in os.path.basename(f).lower():
+                file_analyzer = PythonAnalyzer()
+            elif ".class" in os.path.basename(f).lower():
+                # file_analyzer = JavaAnalyzer()
+                pass
             else:
-                self.lines_code += self.get_line_count(f)
-        print("Lines of test:", self.lines_test)
-        print("Lines of code:", self.lines_code)
+                raise Exception("Invalid file.")
+                
+            if "test" in os.path.basename(f).lower():
+                for k, v in file_analyzer.analyze(f).items():
+                    self.test_counts[k] += v
+            else:
+                for k, v in file_analyzer.analyze(f).items():
+                    self.code_counts[k] += v
+
+        print(self.test_counts)
+        print(self.code_counts)
 
     def get_valid_files(self):
         valid_files = []
@@ -35,4 +49,3 @@ class Analyzer:
                 if not f[0] == "." and f.endswith(self.valid_ext)
             ]
         return valid_files
-
