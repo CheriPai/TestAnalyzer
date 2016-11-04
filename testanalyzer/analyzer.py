@@ -36,5 +36,3 @@ class Analyzer:
             ]
         return valid_files
 
-    def get_line_count(self, filename):
-        return sum(1 for line in open(filename))
