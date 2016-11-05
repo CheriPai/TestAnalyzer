@@ -1,10 +1,11 @@
 import os
+from javaanalyzer import JavaAnalyzer
 from pythonanalyzer import PythonAnalyzer
 
 
 class Analyzer:
 
-    valid_ext = (".py", ".class")
+    valid_ext = (".py", ".java")
 
     def __init__(self, project_name):
         self.project_name = project_name
@@ -25,8 +26,8 @@ class Analyzer:
         for f in self.valid_files:
             if ".py" in os.path.basename(f).lower():
                 file_analyzer = PythonAnalyzer()
-            elif ".class" in os.path.basename(f).lower():
-                # file_analyzer = JavaAnalyzer()
+            elif ".java" in os.path.basename(f).lower():
+                file_analyzer = JavaAnalyzer()
                 pass
             else:
                 raise Exception("Invalid file.")
