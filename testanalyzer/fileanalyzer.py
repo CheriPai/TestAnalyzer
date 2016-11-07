@@ -1,5 +1,4 @@
 class FileAnalyzer():
-
     def analyze(self, filename):
         with open(filename) as f:
             content = f.read()

@@ -11,16 +11,16 @@ class Analyzer:
         self.project_name = project_name
         self.valid_files = self.get_valid_files()
         self.file_analyzer = None
-        self.test_counts = {
-            "line_count": 0,
-            "class_count": 0,
-            "function_count": 0
-            }
         self.code_counts = {
             "line_count": 0,
             "class_count": 0,
             "function_count": 0
-            }
+        }
+        self.test_counts = {
+            "line_count": 0,
+            "class_count": 0,
+            "function_count": 0
+        }
 
     def run(self):
         for f in self.valid_files:
@@ -31,16 +31,14 @@ class Analyzer:
                 pass
             else:
                 raise Exception("Invalid file.")
-                
+
             if "test" in os.path.basename(f).lower():
                 for k, v in file_analyzer.analyze(f).items():
                     self.test_counts[k] += v
             else:
                 for k, v in file_analyzer.analyze(f).items():
                     self.code_counts[k] += v
-
-        print(self.test_counts)
-        print(self.code_counts)
+        return self.code_counts, self.test_counts
 
     def get_valid_files(self):
         valid_files = []
