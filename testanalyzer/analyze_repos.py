@@ -7,9 +7,15 @@ from git import Repo
 
 if __name__ == "__main__":
 
-    repos = pd.read_pickle("data/test.pkl")
+    repos = pd.read_pickle("data/repos.pkl")
+    repos["code_lines"] = 0
+    repos["code_classes"] = 0
+    repos["code_functions"] = 0
+    repos["test_lines"] = 0
+    repos["test_classes"] = 0
+    repos["test_functions"] = 0
 
-    for _, repo in repos.iterrows():
+    for i, repo in repos.iterrows():
         if not validators.url(repo["url"]):
             print("Error: Invalid URL.")
             exit(1)
@@ -21,7 +27,13 @@ if __name__ == "__main__":
         print("Analyzing...")
         analyzer = Analyzer(project_name)
         code_counts, test_counts = analyzer.run()
-        print(code_counts)
-        print(test_counts)
+        repos.set_value(i, "code_lines", code_counts["line_count"])
+        repos.set_value(i, "code_classes", code_counts["class_count"])
+        repos.set_value(i, "code_functions", code_counts["function_count"])
+        repos.set_value(i, "test_lines", test_counts["line_count"])
+        repos.set_value(i, "test_classes", test_counts["class_count"])
+        repos.set_value(i, "test_functions", test_counts["function_count"])
 
         shutil.rmtree(project_name)
+
+    repos.to_pickle("data/dataset.pkl")
