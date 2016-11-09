@@ -1,7 +1,10 @@
 class FileAnalyzer():
     def analyze(self, filename):
         with open(filename) as f:
-            content = f.read()
+            try:
+                content = f.read()
+            except:
+                content = ""
         line_count = self.get_line_count(content)
         class_count = self.get_class_count(content)
         function_count = self.get_function_count(content)
