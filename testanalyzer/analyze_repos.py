@@ -21,10 +21,14 @@ if __name__ == "__main__":
             exit(1)
 
         project_name = u.get_name_from_url(repo["url"])
-        print("Cloning {}...".format(project_name))
-        Repo.clone_from(repo["url"], project_name)
+        print("{} / {}: {}".format(i+1, len(repos), project_name))
 
-        print("Analyzing...")
+        try:
+            Repo.clone_from(repo["url"], project_name)
+        except:
+            print("Error cloning {}".format(repo["url"]))
+            continue
+
         analyzer = Analyzer(project_name)
         code_counts, test_counts = analyzer.run()
         repos.set_value(i, "code_lines", code_counts["line_count"])
