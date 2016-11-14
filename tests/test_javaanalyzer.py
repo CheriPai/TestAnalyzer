@@ -2,7 +2,7 @@ from javaanalyzer import JavaAnalyzer
 from unittest import TestCase
 
 
-class TestPythonAnalyzer(TestCase):
+class TestJavaAnalyzer(TestCase):
     def setUp(self):
         self.analyzer = JavaAnalyzer()
 
