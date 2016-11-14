@@ -28,11 +28,10 @@ def analyze():
     print("Analyzing...")
     analyzer = Analyzer(project_name)
     code_counts, test_counts = analyzer.run()
-    print(code_counts)
-    print(test_counts)
 
     shutil.rmtree(project_name)
-    return None
+    return jsonify(code_lines=code_counts["line_count"], code_classes=code_counts["class_count"], code_functions=code_counts["function_count"],
+        test_lines=test_counts["line_count"], test_classes=test_counts["class_count"], test_functions=test_counts["function_count"])
 
 if __name__ == "__main__":
     print("==> running server")
