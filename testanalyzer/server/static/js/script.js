@@ -1,4 +1,8 @@
 var data = {};
+var average = [0.2708, 0.3376, 0.2896];
+var ctx = $("#ctx");
+var tmp = new Chart(ctx, {type: "horizontalBar"});
+
 
 function analyze() {
     var repoURL = $("#repoURL").val();
@@ -13,24 +17,24 @@ function analyze() {
 
 function populateCtx() {
     var ratios = [data["test_lines"] / data["code_lines"], data["test_classes"] / data["code_classes"], data["test_functions"] / data["code_functions"]];
-    var ctx = $("#ctx");
     var bar = new Chart(ctx, {
         type: 'horizontalBar',
         data: {
             labels: ["Lines", "Classes", "Functions"],
-            datasets: [{
-                label: "Ratio of test over code",
-                data: ratios,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderWidth: 1
-            }]
+            datasets: [
+                {
+                    label: "Your Project",
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    data: ratios,
+                    borderWidth: 1
+                },
+                {
+                    label: "GitHub Average",
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    data: average,
+                    borderWidth: 1
+                }
+            ]
         },
         options: {
             scales: {

@@ -13,20 +13,18 @@
         <div class="container">
             <h1>TestAnalyzer</h1>
             <hr></hr>
-            <div class="col-sm-8">
+            <div class="col-sm-4">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="input-group">
-                            <input id="repoURL" type="text" class="form-control" placeholder="GitHub repository URL">
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" onclick="analyze()">Analyze</button>
-                            </span>
-                        </div>
+                    <div class="input-group">
+                        <input id="repoURL" type="text" class="form-control" placeholder="GitHub repository URL">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="analyze()">Analyze</button>
+                        </span>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <canvas id="ctx" width="400" height="400"></canvas>
+            <div class="col-sm-8">
+                <canvas id="ctx" width="500" height="400"></canvas>
             </div>
         </div>
 

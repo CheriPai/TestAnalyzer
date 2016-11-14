@@ -5,13 +5,13 @@ from analyzer import Analyzer
 from flask import Flask, jsonify, render_template, request
 from git import Repo
 
-
 app = Flask(__name__)
 
 
 @app.route("/")
 def main():
     return render_template("index.html")
+
 
 @app.route("/analyze")
 def analyze():
@@ -30,8 +30,14 @@ def analyze():
     code_counts, test_counts = analyzer.run()
 
     shutil.rmtree(project_name)
-    return jsonify(code_lines=code_counts["line_count"], code_classes=code_counts["class_count"], code_functions=code_counts["function_count"],
-        test_lines=test_counts["line_count"], test_classes=test_counts["class_count"], test_functions=test_counts["function_count"])
+    return jsonify(
+        code_lines=code_counts["line_count"],
+        code_classes=code_counts["class_count"],
+        code_functions=code_counts["function_count"],
+        test_lines=test_counts["line_count"],
+        test_classes=test_counts["class_count"],
+        test_functions=test_counts["function_count"])
+
 
 if __name__ == "__main__":
     print("==> running server")
