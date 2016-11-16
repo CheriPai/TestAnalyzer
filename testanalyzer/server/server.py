@@ -31,6 +31,7 @@ def analyze():
 
     shutil.rmtree(project_name)
     return jsonify(
+        project_name=project_name,
         code_lines=code_counts["line_count"],
         code_classes=code_counts["class_count"],
         code_functions=code_counts["function_count"],
