@@ -2,6 +2,13 @@ var data = {};
 var average = [0.2708, 0.3376, 0.2896];
 var ctx = $("#ctx");
 var tmp = new Chart(ctx, {type: "horizontalBar"});
+var ratios = [];
+var weight = 1.5;
+
+
+function sigmoid(x) {
+    return 1 / (1 + Math.pow(Math.E, -x))
+}
 
 
 function analyze() {
@@ -17,7 +24,7 @@ function analyze() {
 
 function populateCtx() {
     tmp.destroy();
-    var ratios = [
+    ratios = [
         (data["test_lines"] / data["code_lines"]).toFixed(4),
         (data["test_classes"] / data["code_classes"]).toFixed(4),
         (data["test_functions"] / data["code_functions"]).toFixed(4)
@@ -51,5 +58,8 @@ function populateCtx() {
             }
         }
     });
+    var score = sigmoid(weight * ((ratios[0] - average[0]) + (ratios[1] - average[1]) + (ratios[2] - average[2])));
+    alert((score*100).toFixed(2);
     tmp = bar;
 }
+
