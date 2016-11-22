@@ -18,7 +18,12 @@ function analyze() {
         data: {"URL": $("#repoURL").val()}, 
         success: function(result){
             data = result;
-            populateCtx();
+            if (data["error"]) {
+                alert(data["error"]);
+            }
+            else {
+                populateCtx();
+            }
     }});
 }
 

@@ -18,8 +18,7 @@ def analyze():
     project_url = request.args["URL"]
 
     if not validators.url(project_url):
-        print("Error: Invalid URL.")
-        exit(1)
+        return jsonify(error="Invalid URL")
 
     project_name = u.get_name_from_url(project_url)
     print("Cloning {}...".format(project_name))
