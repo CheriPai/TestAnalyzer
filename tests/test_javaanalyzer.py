@@ -22,6 +22,9 @@ class TestJavaAnalyzer(TestCase):
     def test_get_class_count_none(self):
         assert self.analyzer.get_class_count("") == 0
 
+    def test_get_class_count_no_space(self):
+        assert self.analyzer.get_class_count("publicclasstest{") == 0
+
     def test_get_function_count_basic(self):
         assert self.analyzer.get_function_count("public int test() {") == 1
 
@@ -36,3 +39,6 @@ class TestJavaAnalyzer(TestCase):
 
     def test_get_function_count_none(self):
         assert self.analyzer.get_function_count("") == 0
+
+    def test_get_function_count_no_space(self):
+        assert self.analyzer.get_class_count("publicinttest(){") == 0
