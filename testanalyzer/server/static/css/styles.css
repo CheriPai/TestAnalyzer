@@ -1,3 +1,7 @@
 html, body, .container, .col-sm-8, .col-sm-4 {
   height: 100%;
 }
+
+#score {
+    padding-left: 0.5em;
+}
