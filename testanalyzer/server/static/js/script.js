@@ -65,7 +65,18 @@ function populateCtx() {
     });
     var score = sigmoid(weight * ((ratios[0] - average[0]) + (ratios[1] - average[1]) + (ratios[2] - average[2])));
     score = (score*100).toFixed(2);
+    if (isNaN(score)) {
+        score = 0;
+    }
     $("#score").html(score);
+    if (score < 60) {
+        $("#score").css("color", "red");
+    } else if (score < 80) {
+        $("#score").css("color", "yellow");
+    }
+    else {
+        $("#score").css("color", "green");
+    }
     tmp = bar;
 }
 
