@@ -4,3 +4,19 @@ Provides a quick and easy way to gain insight on the test quality of any Python 
 
 ##### Screenshot
 ![](testanalyzer/data/ta_ss.png?raw=false)
+
+
+##### Setup
+- ```$ pip install -r requirements.txt```
+
+
+##### Run
+- ```$ cd <project root>/testanalyzer```
+- ```$ export PYTHONPATH="."```
+- ```$ python server/server.py```
+Visit http://localhost:5000
+
+
+##### Test
+- ```$ cd <project root>```
+- ```$ nosetests```
