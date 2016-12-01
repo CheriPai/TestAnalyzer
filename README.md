@@ -14,7 +14,7 @@ Provides a quick and easy way to gain insight on the test quality of any Python 
 - ```$ cd <project root>/testanalyzer```
 - ```$ export PYTHONPATH="."```
 - ```$ python server/server.py```
-Visit http://localhost:5000
+- Visit http://localhost:5000
 
 
 ##### Test
